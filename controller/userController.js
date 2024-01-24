@@ -67,6 +67,7 @@ export const userRegisterController = async (req, res) => {
     }
 };
 
+//Login user
 export const userLoginController = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -108,6 +109,53 @@ export const userLoginController = async (req, res) => {
         });
     } catch (error) {
         console.error("Error in Login User <=>", error);
+        res.status(500).send({
+            success: false,
+            message: error.message,
+            error,
+        });
+    }
+};
+
+//Forgot Password
+
+export const userForgotPasswordController = async (req, res) => {
+    try {
+        const { email, password, answer } = req.body;
+        //validations
+
+        if (!email) {
+            throw new Error("Email is Required");
+        }
+        if (!password) {
+            throw new Error("Password is Required");
+        }
+        if (!answer) {
+            throw new Error("Answer is Required");
+        }
+
+        //Finding user
+        const existUser = await UserModel.findOne({ email });
+        //User not Exist
+        if (!existUser) {
+            throw new Error("Invalid User or Answer");
+        }
+        //Answer Not Match
+        if (answer.toLowerCase() !== existUser.answer.toLowerCase()) {
+            throw new Error("Invalid User or Answer");
+        }
+        //Pasword Hashing
+        const hashedPassword = await hashPassword(password);
+
+        await UserModel.findByIdAndUpdate(existUser._id, {
+            password: hashedPassword,
+        });
+        res.status(200).send({
+            success: true,
+            message: "Password Successfully",
+        });
+    } catch (error) {
+        console.error("Error in Forgot Password <=>", error);
         res.status(500).send({
             success: false,
             message: error.message,
