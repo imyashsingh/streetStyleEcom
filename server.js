@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 //file imports
 import connectDB from "./config/db.js";
@@ -15,6 +16,7 @@ connectDB();
 
 //Middleware
 app.use(express.json());
+app.use(cors());
 
 //Test Rest api
 app.get("/", (req, res) => {

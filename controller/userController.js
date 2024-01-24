@@ -72,12 +72,15 @@ export const userLoginController = async (req, res) => {
         const { email, password } = req.body;
 
         //check invalid email password
-
         if (!email || !password) {
             throw new Error("invalid email or password");
         }
 
         const curruser = await UserModel.findOne({ email });
+
+        if (!curruser) {
+            throw new Error("invalid email or password");
+        }
 
         const match = await comparePassword(password, curruser.password);
 
