@@ -2,7 +2,7 @@ import React from "react";
 
 const Legal = () => {
     return (
-        <div className="text-wrap pt-32 text-center mx-64">
+        <div className="text-wrap pt-32 text-center mx-20">
             <h1 className="font-black">TERMS & CONDITIONS</h1>
             <p className="pt-12 leading-loose">
                 First things first, privacy and security of your personal

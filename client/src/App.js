@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Legal from "./pages/Legal";
 import ReturnAndExchange from "./pages/ReturnAndExchange";
+import RegisterPage from "./pages/authPages/RegisterPage";
+import LogInPage from "./pages/authPages/LogInPage";
+import ForgotPasswordPage from "./pages/authPages/ForgotPasswordPage";
 
 function App() {
     return (
@@ -14,10 +17,17 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
-                    <Route path="about" element={<About />} />
-                    <Route path="legal" element={<Legal />} />
+
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/login" element={<LogInPage />} />
                     <Route
-                        path="returnandexchange"
+                        path="/forgotPassword"
+                        element={<ForgotPasswordPage />}
+                    />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/legal" element={<Legal />} />
+                    <Route
+                        path="/returnandexchange"
                         element={<ReturnAndExchange />}
                     />
 

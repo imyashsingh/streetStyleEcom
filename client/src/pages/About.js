@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
     return (
-        <div className="text-wrap pt-32 text-center mx-64">
+        <div className="text-wrap pt-32 text-center mx-20">
             <h1 className="font-black">ABOUT</h1>
             <p className="pt-12 leading-loose">
                 Our name, “StreetStyle” is an amalgamation of two complete

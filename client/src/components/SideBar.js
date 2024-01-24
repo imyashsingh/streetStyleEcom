@@ -6,7 +6,7 @@ const SideBar = ({ sideBarSwitch }) => {
         <div
             className={
                 sideBarSwitch
-                    ? "bg-blue-400 fixed h-screen w-48 flex flex-col justify-start items-center border-gray-950 border-r-2 pt-24 gap-3 z-9"
+                    ? "bg-white fixed h-screen w-48 flex flex-col justify-start items-center border-gray-950 border-r-2 pt-24 gap-3 z-9"
                     : "hidden"
             }
         >
@@ -18,7 +18,7 @@ const SideBar = ({ sideBarSwitch }) => {
             <hr className="border-gray-950 w-48" />
             <Link to="/about">ABOUT</Link>
             <Link to="/returnAndExchange">RETURN & EXCHANGE</Link>
-            <Link to="/legal">Legal</Link>
+            <Link to="/legal">TERMS & CONDITIONS</Link>
         </div>
     );
 };
