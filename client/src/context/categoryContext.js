@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const CategoryContext = createContext();
 
 const CategoryProvider = ({ children }) => {
-    const [allCategory, setAllCategory] = useState(null);
+    const [allCategory, setAllCategory] = useState([]);
 
     useEffect(() => {
         const getAllCategory = async () => {
