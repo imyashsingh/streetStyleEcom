@@ -10,7 +10,10 @@ const Layout = () => {
     return (
         <>
             <ToastContainer />
-            <Header setSideBarSwitch={setSideBarSwitch} />
+            <Header
+                sideBarSwitch={sideBarSwitch}
+                setSideBarSwitch={setSideBarSwitch}
+            />
             <SideBar sideBarSwitch={sideBarSwitch} />
             <Outlet />
         </>

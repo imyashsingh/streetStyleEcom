@@ -11,10 +11,13 @@ import kidM from "../images/HomePage/Kid-M.jpg";
 import accessoriesM from "../images/HomePage/Accesories-M.jpg";
 
 const Home = () => {
+    //image for desktop
     const images = [men, women, kid, accessories];
+    //image for mobile device
     const imagesM = [menM, womenM, kidM, accessoriesM];
     const [currentImage, setCurrentImage] = useState(0);
 
+    //change Homepage Image in interval
     useEffect(() => {
         const interval = setInterval(() => {
             // Update the current image every 5 seconds (adjust as needed)

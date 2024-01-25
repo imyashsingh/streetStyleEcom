@@ -15,11 +15,19 @@ router.post("/register", userRegisterController);
 router.post("/login", userLoginController);
 
 //forgot password
-router.post("/forgotPassword", userForgotPasswordController);
+router.put("/forgotPassword", userForgotPasswordController);
 
-router.get("/test", requireSignIn, isAdmin, (req, res) => {
+router.get("/checkUser", requireSignIn, (req, res) => {
     try {
-        res.send("loged IN");
+        res.send({ success: true });
+    } catch (error) {
+        res.send(error);
+    }
+});
+
+router.get("/checkAdmin", requireSignIn, isAdmin, (req, res) => {
+    try {
+        res.send({ success: true });
     } catch (error) {
         res.send(error);
     }

@@ -21,9 +21,10 @@ export const AuthRegisterUserApi = async (payload) => {
     });
 };
 
+//Api for forgot password change
 export const AuthForgotPasswordApi = async (payload) => {
     const { email, password, answer } = payload;
-    return await axios.post("/api/v1/user/forgotPassword", {
+    return await axios.put("/api/v1/user/forgotPassword", {
         email,
         password,
         answer,
