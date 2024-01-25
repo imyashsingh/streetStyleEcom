@@ -97,7 +97,7 @@ export const userLoginController = async (req, res) => {
             console.log(match);
             throw new Error("Please Enter Valid Email or Password");
         }
-        const user = { ...curruser._doc, token };
+        const user = { user: { ...curruser._doc }, token };
 
         // removing password from api data
         delete user.password;
