@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaSearch, FaUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 
@@ -13,6 +13,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
     const [profileSelected, setProfileSelected] = useState(false);
 
     const navigate = useNavigate();
+    const location = useLocation();
     const dropDownRef = useRef();
     const searchRef = useRef();
     const { auth, setAuth } = useAuth();
@@ -61,7 +62,11 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
 
     return (
         <nav className=" fixed w-screen z-10">
-            <div className="flex justify-between items-center px-6 h-12 border-gray-950 border-b-2 md:border-0 ">
+            <div
+                className={`${
+                    location.pathname !== "/" && "bg-white"
+                } flex justify-between items-center px-6 h-12 border-gray-950 border-b-2 md:border-0 `}
+            >
                 {/*Sidebar*/}
                 <div
                     className="flex-30 bg-white p-2 rounded"
@@ -164,7 +169,11 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                 </div>
             </div>
             {/*Catagories Section */}
-            <div className=" hidden font-bold pt-8  md:h-6 md:flex md:justify-center md:w-screen md:gap-20 md:items-end md:border-b-2 md:border-gray-950">
+            <div
+                className={`${
+                    location.pathname !== "/" && "bg-white"
+                } hidden font-bold pt-8  md:h-6 md:flex md:justify-center md:w-screen md:gap-20 md:items-end md:border-b-2 md:border-gray-950`}
+            >
                 <p>Catagory</p>
                 <p>Catagory</p>
                 <p>Catagory</p>
@@ -174,7 +183,9 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
             <div
                 className={
                     searchSelected
-                        ? "text-center border-b-2 border-gray-950"
+                        ? `${
+                              location.pathname !== "/" && "bg-white"
+                          } text-center border-b-2 border-gray-950`
                         : "hidden"
                 }
                 ref={searchRef}
@@ -182,7 +193,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                 <form className="inline-block " onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        className="h-10 p-4 w-[400px] rounded"
+                        className="h-10 p-4 w-[400px] rounded border-x-2 border-gray-950"
                         placeholder="SEARCH"
                         value={searchValue}
                         onChange={(e) => {
