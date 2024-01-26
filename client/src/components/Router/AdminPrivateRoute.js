@@ -27,7 +27,7 @@ const AdminPrivateRoute = () => {
 
     return (
         <>
-            {true ? (
+            {isAdmin ? (
                 <div className="w-screen h-screen flex justify-center  pt-24 pb-16 px-4 md:pt-32 md:pb-24 md:px-16">
                     <div className="basis-1/4 p-2 pe-0">
                         <AdminMenu />
