@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllCategoryApi } from "../api/categoryApi";
-import { toast } from "react-toastify";
+
+import { getAllCategory } from "../helper/categoryHelper";
 
 const CategoryContext = createContext();
 
@@ -8,15 +8,7 @@ const CategoryProvider = ({ children }) => {
     const [allCategory, setAllCategory] = useState([]);
 
     useEffect(() => {
-        const getAllCategory = async () => {
-            await getAllCategoryApi()
-                .then(({ data }) => setAllCategory(data?.allCategory))
-                .catch((err) => {
-                    console.log(err);
-                    toast.error("Somthing Went Wrong In Getting Category");
-                });
-        };
-        getAllCategory();
+        getAllCategory(setAllCategory);
     }, []);
 
     return (

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { createCategoryApi, getAllCategoryApi } from "../../api/categoryApi";
+import { createCategoryApi, deleteCategoryApi } from "../../api/categoryApi";
 import { toast } from "react-toastify";
 import { useAllCategory } from "../../context/categoryContext";
+import EditCategoryBox from "../../components/EditCategoryBox";
+import { getAllCategory } from "../../helper/categoryHelper";
 
 const CreateCategory = () => {
     const [categoryName, setCategoryName] = useState("");
+    const [editButton, setEditButton] = useState(false);
+    const [updateCategory, setUpdateCategory] = useState("");
 
     const { allCategory, setAllCategory } = useAllCategory();
 
@@ -13,7 +17,7 @@ const CreateCategory = () => {
         e.preventDefault();
         await createCategoryApi({ categoryName })
             .then(({ data }) => {
-                getAllCategory();
+                getAllCategory(setAllCategory);
                 toast.success(data?.message);
                 setCategoryName("");
             })
@@ -27,20 +31,32 @@ const CreateCategory = () => {
             });
     };
 
-    const getAllCategory = async () => {
-        await getAllCategoryApi()
+    //Deleting Category
+    const handleDelete = async (category) => {
+        await deleteCategoryApi({ id: category?._id })
             .then(({ data }) => {
-                setAllCategory(data?.allCategory);
+                getAllCategory(setAllCategory);
+                toast.success(data?.message);
             })
             .catch((err) => {
                 console.log(err);
-                toast.error("Somthing Went Wrong In Getting Category");
+                toast.error(
+                    err?.response?.data?.message ||
+                        err.message ||
+                        "Error In Deleting Category"
+                );
             });
     };
 
     return (
         <div className=" flex flex-col items-center justify-center">
-            <div className="font-black text-xl">Create Product</div>
+            {editButton && (
+                <EditCategoryBox
+                    updateCategory={updateCategory}
+                    setEditButton={setEditButton}
+                />
+            )}
+            <div className="font-black text-xl">Create Category</div>
             <form
                 className="p-5 w-full text-center "
                 onSubmit={handleSubmitCategory}
@@ -68,10 +84,19 @@ const CreateCategory = () => {
                     >
                         <div className="p-2">{category?.name}</div>
                         <div>
-                            <button className="rounded m-1 p-2 bg-yellow-500">
+                            <button
+                                onClick={() => {
+                                    setUpdateCategory(category);
+                                    setEditButton(!editButton);
+                                }}
+                                className="rounded m-1 p-2 bg-yellow-500"
+                            >
                                 EDIT
                             </button>
-                            <button className=" rounded m-1 p-2 bg-red-500">
+                            <button
+                                onClick={() => handleDelete(category)}
+                                className=" rounded m-1 p-2 bg-red-500"
+                            >
                                 Delete
                             </button>
                         </div>
