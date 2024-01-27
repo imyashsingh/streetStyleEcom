@@ -85,7 +85,11 @@ const CreateProduct = () => {
     return (
         <div className=" flex flex-col items-center justify-center">
             <div className="font-black text-xl">Create Category</div>
-            <form className="p-3" onSubmit={handleSubmit}>
+            <form
+                className="p-3"
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
+            >
                 <div className="space-y-12">
                     <div className="border-b border-gray-900/10 pb-12">
                         <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 items-center">

@@ -7,8 +7,10 @@ import { v2 as cloudinary } from "cloudinary";
 export const createProductController = async (req, res) => {
     try {
         const { name, brand, category, price, color, sizes, description } =
-            req.fields;
-        const { image } = req.files;
+            req.body;
+
+        const image = req.file;
+
         const parseSizes = JSON.parse(sizes);
 
         //validation
@@ -55,8 +57,10 @@ export const createProductController = async (req, res) => {
         }
 
         //Image upload to cloud
+        const b64 = Buffer.from(image.buffer).toString("base64");
+        let dataURI = "data:" + image.mimetype + ";base64," + b64;
 
-        const imageStoreRes = await cloudinary.uploader.upload(image.path, {
+        const imageStoreRes = await cloudinary.uploader.upload(dataURI, {
             resource_type: "image",
             folder: "streetStyle/images",
         });
