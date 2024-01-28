@@ -56,7 +56,7 @@ const CreateCategory = () => {
                     setEditButton={setEditButton}
                 />
             )}
-            <div className="font-black text-xl">Create Category</div>
+            <div className="font-bold text-3xl">Create Category</div>
             <form
                 className="p-5 w-full text-center "
                 onSubmit={handleSubmitCategory}
@@ -68,7 +68,7 @@ const CreateCategory = () => {
                     onChange={(e) => setCategoryName(e.target.value)}
                     required
                 ></input>
-                <button className="rounded border-2 bg-blue-500 active:bg-blue-400 px-5 py-2 mt-3">
+                <button className="rounded-lg border-2 text-white  bg-blue-500 hover:bg-blue-400 active:bg-blue-300 px-5 py-2 mt-3">
                     Add
                 </button>
             </form>
@@ -89,13 +89,13 @@ const CreateCategory = () => {
                                     setUpdateCategory(category);
                                     setEditButton(!editButton);
                                 }}
-                                className="rounded m-1 p-2 bg-yellow-500"
+                                className="rounded m-1 p-2 text-white bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-300"
                             >
                                 EDIT
                             </button>
                             <button
                                 onClick={() => handleDelete(category)}
-                                className=" rounded m-1 p-2 bg-red-500"
+                                className=" rounded m-1 p-2 text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
                             >
                                 Delete
                             </button>

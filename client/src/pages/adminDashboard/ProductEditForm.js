@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAllCategory } from "../../context/categoryContext";
-import { createProductApi } from "../../api/poductApi";
+import {
+    getSingleProductsApi,
+    productDeleteApi,
+    productEditApi,
+} from "../../api/poductApi";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const CreateProduct = () => {
+const ProductEditForm = () => {
     const navigate = useNavigate();
+    const [queryString] = useSearchParams();
 
     const { allCategory } = useAllCategory();
     const allSize = [
@@ -42,7 +47,40 @@ const CreateProduct = () => {
     const [size, setSize] = useState("OneSize");
     const [quantity, setQuantity] = useState("");
     const [sizeAndQuantity, setSizeAndQuantity] = useState([]);
+    const [limage, setLimage] = useState(true);
+    const [pid, setPid] = useState();
+    const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        const getSingleProduct = async () => {
+            const newpid = queryString.get("pid");
+            setPid(newpid);
+            await getSingleProductsApi(newpid)
+                .then(({ data }) => {
+                    console.log(data?.product?.sizes);
+                    setName(data?.product?.name);
+                    setBrand(data?.product?.brand);
+                    setCategory(data?.product?.category?._id);
+                    setPrice(data?.product?.price);
+                    setColor(data?.product?.color);
+                    setDescription(data?.product?.description);
+                    setSizeAndQuantity(data?.product?.sizes);
+                    setImage(data?.product?.image?.url);
+                    console.log(data?.product?.category?._id);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error(
+                        err?.response?.data?.message ||
+                            err.message ||
+                            "Error In Getting Single Product"
+                    );
+                });
+        };
+        getSingleProduct();
+    }, [queryString]);
+
+    //handle update product
     const handleSubmit = async (e) => {
         e.preventDefault();
         const productData = new FormData();
@@ -52,20 +90,42 @@ const CreateProduct = () => {
         productData.append("price", price);
         productData.append("color", color);
         productData.append("description", description);
-        productData.append("image", image);
         productData.append("sizes", JSON.stringify(sizeAndQuantity));
 
-        await createProductApi(productData)
+        !limage && productData.append("image", image);
+
+        setLoading(true);
+        await productEditApi(pid, productData)
             .then(({ data }) => {
                 toast.success(data?.message);
                 navigate("/dashboard/admin/product-edit");
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
                 toast.error(
                     err?.response?.data?.message ||
                         err.message ||
-                        "Error In Creating Product"
+                        "Error In Editing Product"
+                );
+            });
+    };
+
+    //handle delete product
+    const handleDelete = async () => {
+        setLoading(true);
+        await productDeleteApi(pid)
+            .then(({ data }) => {
+                toast.success(data?.message);
+                navigate("/dashboard/admin/product-edit");
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error(
+                    err?.response?.data?.message ||
+                        err.message ||
+                        "Error In Deleting Product"
                 );
             });
     };
@@ -95,7 +155,7 @@ const CreateProduct = () => {
     };
     return (
         <div className=" flex flex-col items-center justify-center">
-            <div className="font-bold text-3xl">Create Category</div>
+            <div className="font-bold text-3xl">Update or Delete Product</div>
             <form
                 className="p-3"
                 onSubmit={handleSubmit}
@@ -160,10 +220,7 @@ const CreateProduct = () => {
                                         id="Category"
                                         name="Category"
                                         autoComplete="Category-name"
-                                        defaultValue={{
-                                            label: "Select Category",
-                                            value: null,
-                                        }}
+                                        value={category}
                                         onChange={(e) => {
                                             console.log(e.target.value);
                                             setCategory(e.target.value);
@@ -277,7 +334,6 @@ const CreateProduct = () => {
                                                 Math.abs(e.target.value * 1)
                                             );
                                         }}
-                                        required
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -350,14 +406,20 @@ const CreateProduct = () => {
                                 type="file"
                                 hidden
                                 accept="image/*"
-                                onChange={(e) => setImage(e.target.files[0])}
-                                required
+                                onChange={(e) => {
+                                    setImage(e.target.files[0]);
+                                    setLimage(false);
+                                }}
                             />
                         </label>
                         {image && (
                             <div className="text-center pt-4">
                                 <img
-                                    src={URL.createObjectURL(image)}
+                                    src={
+                                        limage
+                                            ? image
+                                            : URL.createObjectURL(image)
+                                    }
                                     alt="product_photo"
                                     className="h-64"
                                 />
@@ -366,17 +428,36 @@ const CreateProduct = () => {
                     </div>
                 </div>
                 <div className="mt-6 flex items-center justify-end gap-x-6">
-                    <button
-                        type="submit"
-                        disabled={sizeAndQuantity.length === 0}
-                        className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-                    >
-                        Save
-                    </button>
+                    {loading ? (
+                        <div className="bg-gray-800 h-max w-max rounded-lg text-white font-bold">
+                            <div className="flex items-center justify-center m-[10px]">
+                                <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-white border-4" />
+                                <div className="ml-2">
+                                    Processing... <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            <button
+                                type="submit"
+                                disabled={sizeAndQuantity.length === 0}
+                                className={`rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600`}
+                            >
+                                UPDATE
+                            </button>
+                            <div
+                                onClick={handleDelete}
+                                className=" cursor-pointer rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                            >
+                                DELETE
+                            </div>
+                        </>
+                    )}
                 </div>
             </form>
         </div>
     );
 };
 
-export default CreateProduct;
+export default ProductEditForm;

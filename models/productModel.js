@@ -27,6 +27,7 @@ const ProductSchema = new mongoose.Schema(
         price: {
             type: Number,
             required: true,
+            min: 0,
         },
         color: {
             type: String,
@@ -44,10 +45,12 @@ const ProductSchema = new mongoose.Schema(
                     quantity: {
                         type: Number,
                         default: 0, // Default quantity is set to 0
+                        min: 0,
                     },
                 },
             ],
             default: [],
+            required: true,
         },
         description: {
             type: String,

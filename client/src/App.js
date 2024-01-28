@@ -18,6 +18,7 @@ import CreateCategory from "./pages/adminDashboard/CreateCategory";
 import CreateProduct from "./pages/adminDashboard/CreateProduct";
 import ProductsEdit from "./pages/adminDashboard/ProductsEdit";
 import OrderStatusChange from "./pages/adminDashboard/OrderStatusChange";
+import ProductEditForm from "./pages/adminDashboard/ProductEditForm";
 
 function App() {
     return (
@@ -44,6 +45,10 @@ function App() {
                         <Route
                             path="admin/product-edit"
                             element={<ProductsEdit />}
+                        />
+                        <Route
+                            path="admin/product-edit/:name"
+                            element={<ProductEditForm />}
                         />
                         <Route
                             path="admin/orders-status"
