@@ -33,12 +33,12 @@ const Home = () => {
             <img
                 src={images[currentImage]}
                 alt="cover"
-                className=" hidden md:block w-screen h-auto "
+                className=" hidden md:block h-full w-full object-cover object-center "
             />
             <img
                 src={imagesM[currentImage]}
                 alt="cover"
-                className="md:hidden sm:block h-screen w-auto"
+                className="md:hidden sm:block h-full w-full object-cover object-center"
             />
         </div>
     );

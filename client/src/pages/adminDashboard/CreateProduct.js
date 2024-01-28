@@ -4,33 +4,12 @@ import { createProductApi } from "../../api/poductApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+import { allSize } from "../../default/defaultConstant";
+
 const CreateProduct = () => {
     const navigate = useNavigate();
 
     const { allCategory } = useAllCategory();
-    const allSize = [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL",
-        "OneSize",
-    ];
 
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");
@@ -42,9 +21,11 @@ const CreateProduct = () => {
     const [size, setSize] = useState("OneSize");
     const [quantity, setQuantity] = useState("");
     const [sizeAndQuantity, setSizeAndQuantity] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const productData = new FormData();
         productData.append("name", name);
         productData.append("brand", brand);
@@ -59,6 +40,7 @@ const CreateProduct = () => {
             .then(({ data }) => {
                 toast.success(data?.message);
                 navigate("/dashboard/admin/product-edit");
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -95,7 +77,7 @@ const CreateProduct = () => {
     };
     return (
         <div className=" flex flex-col items-center justify-center">
-            <div className="font-bold text-3xl">Create Category</div>
+            <div className="font-bold text-3xl">Create Product</div>
             <form
                 className="p-3"
                 onSubmit={handleSubmit}
@@ -277,7 +259,6 @@ const CreateProduct = () => {
                                                 Math.abs(e.target.value * 1)
                                             );
                                         }}
-                                        required
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -366,13 +347,24 @@ const CreateProduct = () => {
                     </div>
                 </div>
                 <div className="mt-6 flex items-center justify-end gap-x-6">
-                    <button
-                        type="submit"
-                        disabled={sizeAndQuantity.length === 0}
-                        className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-                    >
-                        Save
-                    </button>
+                    {loading ? (
+                        <div className="bg-gray-800 h-max w-max rounded-lg text-white font-bold">
+                            <div className="flex items-center justify-center m-[10px]">
+                                <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-white border-4" />
+                                <div className="ml-2">
+                                    Processing... <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <button
+                            type="submit"
+                            disabled={sizeAndQuantity.length === 0}
+                            className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                        >
+                            Save
+                        </button>
+                    )}
                 </div>
             </form>
         </div>

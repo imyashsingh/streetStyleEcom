@@ -72,7 +72,7 @@ export const createProductController = async (req, res) => {
             url: imageStoreRes?.secure_url,
             publicId: imageStoreRes?.public_id,
         };
-        console.log(imageObj);
+
         const product = await ProductModel({
             name,
             brand,
@@ -231,12 +231,7 @@ export const updateProductController = async (req, res) => {
 
 export const getProductsController = async (req, res) => {
     try {
-        let {
-            search,
-            page = 1,
-            sortBy = "createdAt",
-            sortOrder = "desc",
-        } = req.query;
+        let { search, page = 1, sortprice, category, brand, size } = req.query;
 
         //Pre page products
         const perPage = 6;
@@ -256,9 +251,26 @@ export const getProductsController = async (req, res) => {
                 ],
             };
         }
+        if (category) filter.category = category;
 
+        if (brand) filter.brand = { $regex: brand, $options: "i" };
+
+        if (size) filter.sizes = { $elemMatch: { size: size } };
+
+        //sort
+        let sortBy = {};
+
+        if (sortprice) {
+            if (sortprice === "asc") {
+                sortBy.price = 1;
+            } else {
+                sortBy.price = -1;
+            }
+        }
+        sortBy.createdAt = -1;
+        console.log(sortBy);
         const products = await ProductModel.find(filter)
-            .sort({ [sortBy]: sortOrder === "asc" ? 1 : -1 })
+            .sort(sortBy)
             .skip(skipProduct)
             .limit(perPage)
             .populate("category");

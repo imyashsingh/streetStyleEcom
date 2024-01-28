@@ -99,7 +99,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                             onClick={() => setProfileSelected(!profileSelected)}
                             className={
                                 profileSelected
-                                    ? "absolute bg-white leading-normal w-28  p-3 border-gray-950 rounded border-2 top-9 -left-8 z-11"
+                                    ? "absolute bg-white leading-normal w-28  p-3 border-gray-950 rounded border-2 top-9 -left-16 z-11"
                                     : "hidden"
                             }
                         >

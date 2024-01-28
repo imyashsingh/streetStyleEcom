@@ -19,6 +19,7 @@ import CreateProduct from "./pages/adminDashboard/CreateProduct";
 import ProductsEdit from "./pages/adminDashboard/ProductsEdit";
 import OrderStatusChange from "./pages/adminDashboard/OrderStatusChange";
 import ProductEditForm from "./pages/adminDashboard/ProductEditForm";
+import ProductGrid from "./pages/ProductGrid";
 
 function App() {
     return (
@@ -59,6 +60,8 @@ function App() {
                     <Route path="/dashboard" element={<UserPrivateRoute />}>
                         <Route path="user" element={<UserDashboard />} />
                     </Route>
+
+                    <Route path="/product" element={<ProductGrid />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/legal" element={<Legal />} />
                     <Route

@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAllCategory } from "../context/categoryContext";
 
 const SideBar = ({ sideBarSwitch }) => {
+    const { allCategory } = useAllCategory();
     return (
         <div
             className={
@@ -10,15 +12,28 @@ const SideBar = ({ sideBarSwitch }) => {
                     : "hidden"
             }
         >
-            <Link to="/">HOME</Link>
-            <Link to="/men">MEN</Link>
-            <Link to="/women">WOMEN</Link>
-            <Link to="/kids">KIDS</Link>
-            <Link to="/accessories">ACCESSORIES</Link>
+            <Link to="/" className="hover:font-bold">
+                HOME
+            </Link>
+            {allCategory.map((c) => (
+                <Link
+                    to={`/product?category=${c._id}`}
+                    key={c._id}
+                    className="hover:font-bold"
+                >
+                    {c.name.toUpperCase()}
+                </Link>
+            ))}
             <hr className="border-gray-950 w-48" />
-            <Link to="/about">ABOUT</Link>
-            <Link to="/returnAndExchange">RETURN & EXCHANGE</Link>
-            <Link to="/legal">TERMS & CONDITIONS</Link>
+            <Link to="/about" className="hover:font-bold">
+                ABOUT
+            </Link>
+            <Link to="/returnAndExchange" className="hover:font-bold">
+                RETURN & EXCHANGE
+            </Link>
+            <Link to="/legal" className="hover:font-bold">
+                TERMS & CONDITIONS
+            </Link>
         </div>
     );
 };

@@ -94,7 +94,6 @@ export const userLoginController = async (req, res) => {
 
         //enter valid Email or Password
         if (!match) {
-            console.log(match);
             throw new Error("Please Enter Valid Email or Password");
         }
         const user = { user: { ...curruser._doc }, token };
