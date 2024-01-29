@@ -5,37 +5,16 @@ import {
     productDeleteApi,
     productEditApi,
 } from "../../api/poductApi";
+
 import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { allSize } from "../../default/defaultConstant";
 
 const ProductEditForm = () => {
     const navigate = useNavigate();
     const [queryString] = useSearchParams();
 
     const { allCategory } = useAllCategory();
-    const allSize = [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL",
-        "OneSize",
-    ];
 
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");

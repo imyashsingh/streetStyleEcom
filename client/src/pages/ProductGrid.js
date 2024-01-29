@@ -32,9 +32,9 @@ const ProductGrid = () => {
     }, [queryFilter, nextPageButton]);
 
     return (
-        <div className="flex flex-col justify-center items-center px-5 pt-24 sm:pt-36 sm:px-28 lg:pt-36 lg:px-28">
+        <div className="flex flex-col justify-center items-center pb-5 px-5 pt-24 sm:pt-36 sm:px-28 lg:pt-36 lg:px-28">
             {/*All Product Grid */}
-            <div className=" w-full text-center sm:flex sm:justify-between sm:items-center">
+            <div className=" w-full  text-center sm:flex-wrap sm:flex sm:justify-between sm:items-center">
                 {/*category filter */}
                 <div className="sm:flex">
                     <div>

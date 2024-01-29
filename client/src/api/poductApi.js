@@ -15,6 +15,8 @@ export const getProductsApi = async (queryFilter) => {
     return await axios.get(`/api/v1/product/get-product?${queryFilter}`);
 };
 
+//Get single Product
+
 export const getSingleProductsApi = async (pid) => {
     return await axios.get(`/api/v1/product/get-product/${pid}`);
 };

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import SideBar from "./SideBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./Footer";
 
 const Layout = () => {
     const [sideBarSwitch, setSideBarSwitch] = useState(false);
+    const location = useLocation();
     return (
         <>
             <ToastContainer />
@@ -16,6 +18,7 @@ const Layout = () => {
             />
             <SideBar sideBarSwitch={sideBarSwitch} />
             <Outlet />
+            {location.pathname !== "/" && <Footer />}
         </>
     );
 };

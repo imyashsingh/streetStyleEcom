@@ -20,6 +20,7 @@ import ProductsEdit from "./pages/adminDashboard/ProductsEdit";
 import OrderStatusChange from "./pages/adminDashboard/OrderStatusChange";
 import ProductEditForm from "./pages/adminDashboard/ProductEditForm";
 import ProductGrid from "./pages/ProductGrid";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
     return (
@@ -62,6 +63,7 @@ function App() {
                     </Route>
 
                     <Route path="/product" element={<ProductGrid />} />
+                    <Route path="/product/:slug" element={<ProductDetails />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/legal" element={<Legal />} />
                     <Route
