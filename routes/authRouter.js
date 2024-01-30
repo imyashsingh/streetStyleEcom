@@ -1,5 +1,6 @@
 import express from "express";
 import {
+    updateProfileController,
     userForgotPasswordController,
     userLoginController,
     userRegisterController,
@@ -32,5 +33,9 @@ router.get("/checkAdmin", requireSignIn, isAdmin, (req, res) => {
         res.send(error);
     }
 });
+
+//update profile
+
+router.put("/editProfile", requireSignIn, updateProfileController);
 
 export default router;

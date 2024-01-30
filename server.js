@@ -9,6 +9,8 @@ import connectDB from "./config/db.js";
 import authRouter from "./routes/authRouter.js";
 import categoryRouter from "./routes/categoryRouter.js";
 import productRouter from "./routes/productRouter.js";
+import paymentRouter from "./routes/paymentRouter.js";
+import orderRouter from "./routes/orderRouter.js";
 
 const app = express();
 
@@ -20,6 +22,7 @@ connectDB();
 
 //Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
 
@@ -38,6 +41,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/user", authRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/product", productRouter);
+app.use("/api/v1/payment", paymentRouter);
+app.use("/api/v1/order", orderRouter);
 
 const PORT = 8080;
 

@@ -4,7 +4,7 @@ import { useAuth } from "../../context/authContext";
 const AdminDash = () => {
     const { auth } = useAuth();
     return (
-        <div className="bg-violet-500 p-2 rounded-sm rounded-s-none h-full flex justify-center items-center font-black  text-xl tracking-widest">
+        <div className=" p-2 rounded-sm rounded-s-none h-full flex justify-center items-center font-black  text-xl tracking-widest">
             <div>
                 <h3> Name : {auth?.user?.name}</h3>
                 <h3>Email : {auth?.user?.email}</h3>

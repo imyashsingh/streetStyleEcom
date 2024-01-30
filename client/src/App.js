@@ -21,6 +21,9 @@ import OrderStatusChange from "./pages/adminDashboard/OrderStatusChange";
 import ProductEditForm from "./pages/adminDashboard/ProductEditForm";
 import ProductGrid from "./pages/ProductGrid";
 import ProductDetails from "./pages/ProductDetails";
+import CartPage from "./pages/CartPage";
+import ProfileEdit from "./pages/ProfileEdit";
+import OrdersUser from "./pages/userDashboard/OrdersUser";
 
 function App() {
     return (
@@ -36,6 +39,7 @@ function App() {
                     />
                     <Route path="/dashboard" element={<AdminPrivateRoute />}>
                         <Route path="admin" element={<AdminDash />} />
+                        <Route path="admin/profile" element={<ProfileEdit />} />
                         <Route
                             path="admin/create-category"
                             element={<CreateCategory />}
@@ -60,10 +64,16 @@ function App() {
 
                     <Route path="/dashboard" element={<UserPrivateRoute />}>
                         <Route path="user" element={<UserDashboard />} />
+                        <Route path="user/profile" element={<ProfileEdit />} />
+                        <Route
+                            path="user/orders-status"
+                            element={<OrdersUser />}
+                        />
                     </Route>
 
                     <Route path="/product" element={<ProductGrid />} />
                     <Route path="/product/:slug" element={<ProductDetails />} />
+                    <Route path="/cart" element={<CartPage />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/legal" element={<Legal />} />
                     <Route

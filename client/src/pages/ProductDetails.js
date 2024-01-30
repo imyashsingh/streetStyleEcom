@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import men from "../images/HomePage/Men.jpg";
 
 import { getSingleProductsApi } from "../api/poductApi";
+import { useCart } from "../context/cartContext";
 
 const ProductDetails = () => {
     const [queryString] = useSearchParams();
+    const { cart, setCart } = useCart();
     const [pid, setpid] = useState(queryString.get("pid") || "");
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");
@@ -18,6 +20,7 @@ const ProductDetails = () => {
     const [sizes, setSizes] = useState([]);
     const [color, setColor] = useState("");
     const [buySize, SetBuySize] = useState("");
+    const [product, setProduct] = useState("");
 
     useEffect(() => {
         const getProductDetails = async () => {
@@ -31,6 +34,7 @@ const ProductDetails = () => {
                     setImage(data?.product?.image?.url);
                     setSizes(data?.product?.sizes);
                     setColor(data?.product?.color);
+                    setProduct(data?.product);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -43,6 +47,25 @@ const ProductDetails = () => {
         };
         getProductDetails();
     }, [pid]);
+
+    const handleCart = (e) => {
+        e.preventDefault();
+        const index = cart?.findIndex(
+            (ele) => ele?.product?._id === pid && ele?.buySize === buySize
+        );
+        if (index === -1) {
+            setCart([...cart, { product, buySize, quantity: 1 }]);
+            localStorage.setItem(
+                "cart",
+                JSON.stringify([...cart, { product, buySize, quantity: 1 }])
+            );
+        } else {
+            cart[index].quantity = cart[index].quantity + 1;
+            setCart(cart);
+            localStorage.setItem("cart", JSON.stringify([...cart]));
+        }
+        toast.success("Product Added To Cart");
+    };
 
     return (
         <div className="pt-24 px-16 md:pt-40 md:px-24 h-100 flex flex-col items-center">
@@ -77,7 +100,7 @@ const ProductDetails = () => {
                         </div>
                         <div>
                             <span className="font-semibold text-gray-600">
-                                PRICE :{" "}
+                                PRICE : <span>&#8377;</span>
                             </span>
 
                             <span className="font-semibold text-gray-500">
@@ -102,7 +125,7 @@ const ProductDetails = () => {
                             </span>
                         </div>
                         <div>
-                            <form>
+                            <form onSubmit={handleCart}>
                                 <select
                                     value={buySize}
                                     onChange={(e) => {
@@ -113,7 +136,7 @@ const ProductDetails = () => {
                                 >
                                     <option value={""}>select Size</option>
                                     {sizes?.map((s) => (
-                                        <option key={s._id} value={s._id}>
+                                        <option key={s._id} value={s.size}>
                                             {s.size}
                                         </option>
                                     ))}

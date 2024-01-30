@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-
 import men from "../../images/HomePage/Men.jpg";
-import { changeOrderStatusApi, getAllOrderApi } from "../../api/orderApi";
 import { toast } from "react-toastify";
+import { getUserOrderApi } from "../../api/orderApi";
 
-const OrderStatusChange = () => {
+const OrdersUser = () => {
     const [orders, setOrders] = useState([]);
 
     const getAllOrders = async () => {
-        await getAllOrderApi()
+        await getUserOrderApi()
             .then(({ data }) => {
                 setOrders(data?.orders);
             })
@@ -39,26 +38,6 @@ const OrderStatusChange = () => {
 
         return date.toLocaleString("en-US", options);
     };
-
-    //handle status change
-
-    const handleStatusChange = async (status, orderId) => {
-        await changeOrderStatusApi({ orderId, status })
-            .then(({ data }) => {
-                console.log(data);
-                getAllOrders();
-                toast.success(data?.message);
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error(
-                    err?.response?.data?.message ||
-                        err.message ||
-                        "Error In Changing Order Status"
-                );
-            });
-    };
-
     return (
         <div className="flex flex-col w-full ">
             <div className="font-semibold text-xl">All Orders</div>
@@ -78,35 +57,7 @@ const OrderStatusChange = () => {
                         <tbody>
                             <tr>
                                 <td className=" px-4 py-2">{i + 1}</td>
-                                <td className=" px-4 py-2">
-                                    <select
-                                        value={o.status}
-                                        onChange={(e) => {
-                                            handleStatusChange(
-                                                e.target.value,
-                                                o._id
-                                            );
-                                        }}
-                                        className="m-2 mx-0 p-2 border-gray-600 border-2 rounded-md"
-                                        required
-                                    >
-                                        <option value={"pending"}>
-                                            pending
-                                        </option>
-                                        <option value={"processing"}>
-                                            processing
-                                        </option>
-                                        <option value={"shipped"}>
-                                            shipped
-                                        </option>
-                                        <option value={"delivered"}>
-                                            delivered
-                                        </option>
-                                        <option value={"cancelled"}>
-                                            cancelled
-                                        </option>
-                                    </select>
-                                </td>
+                                <td className=" px-4 py-2">{o.status}</td>
                                 <td className=" px-4 py-2">{o.user.name}</td>
                                 <td className=" px-4 py-2">
                                     {getTime(o.createdAt)}
@@ -151,4 +102,4 @@ const OrderStatusChange = () => {
     );
 };
 
-export default OrderStatusChange;
+export default OrdersUser;

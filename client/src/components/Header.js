@@ -57,15 +57,16 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
     //search value handling
     const handleSubmit = (e) => {
         e.preventDefault();
-        searchValue.length !== 0 && navigate(`/search?v=${searchValue}`);
+        searchValue.length !== 0 && navigate(`/product?search${searchValue}`);
     };
 
     return (
         <nav className=" fixed w-screen z-10">
             <div
                 className={`${
-                    location.pathname !== "/" && "bg-white"
-                } flex justify-between items-center px-6 h-12 border-gray-950 border-b-2 md:border-0 `}
+                    location.pathname !== "/" &&
+                    "bg-white border-gray-950 border-b-2 shadow-md "
+                } flex justify-between items-center px-6  h-16`}
             >
                 {/*Sidebar*/}
                 <div
@@ -77,7 +78,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                 {/*LOGO*/}
                 <NavLink
                     to="/"
-                    className="ms-28 font-black text-3xl italic tracking-widest font-"
+                    className=" ms-16 font-bold text-3xl italic tracking-widest "
                 >
                     SxS
                 </NavLink>
@@ -163,22 +164,12 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                             )}
                         </ul>
                     </div>
-                    <Link>
+                    <Link to="/cart">
                         <FaShoppingCart />
                     </Link>
                 </div>
             </div>
-            {/*Catagories Section */}
-            <div
-                className={`${
-                    location.pathname !== "/" && "bg-white"
-                } hidden font-bold pt-8  md:h-6 md:flex md:justify-center md:w-screen md:gap-20 md:items-end md:border-b-2 md:border-gray-950`}
-            >
-                <p>Catagory</p>
-                <p>Catagory</p>
-                <p>Catagory</p>
-                <p>Catagory</p>
-            </div>
+
             {/*Hidden search bar section */}
             <div
                 className={

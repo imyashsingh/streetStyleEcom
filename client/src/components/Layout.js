@@ -12,13 +12,17 @@ const Layout = () => {
     return (
         <>
             <ToastContainer />
-            <Header
-                sideBarSwitch={sideBarSwitch}
-                setSideBarSwitch={setSideBarSwitch}
-            />
-            <SideBar sideBarSwitch={sideBarSwitch} />
-            <Outlet />
-            {location.pathname !== "/" && <Footer />}
+            <div className="flex flex-col min-h-screen">
+                <div className="flex-grow">
+                    <Header
+                        sideBarSwitch={sideBarSwitch}
+                        setSideBarSwitch={setSideBarSwitch}
+                    />
+                    <SideBar sideBarSwitch={sideBarSwitch} />
+                    <Outlet />
+                </div>
+                {location.pathname !== "/" && <Footer />}
+            </div>
         </>
     );
 };

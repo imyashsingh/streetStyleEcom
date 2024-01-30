@@ -218,7 +218,7 @@ export const updateProductController = async (req, res) => {
             product,
         });
     } catch (error) {
-        console.log("Error While Updating Product".error);
+        console.log("Error While Updating Product", error);
         res.status(500).send({
             success: false,
             error,
@@ -268,7 +268,7 @@ export const getProductsController = async (req, res) => {
             }
         }
         sortBy.createdAt = -1;
-        console.log(sortBy);
+
         const products = await ProductModel.find(filter)
             .sort(sortBy)
             .skip(skipProduct)

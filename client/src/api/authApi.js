@@ -30,3 +30,14 @@ export const AuthForgotPasswordApi = async (payload) => {
         answer,
     });
 };
+
+export const profileUpdateApi = async (payload) => {
+    const { address, password, answer, phone, name } = payload;
+    return await axios.put("/api/v1/user/editProfile", {
+        name,
+        password,
+        answer,
+        phone,
+        address,
+    });
+};
