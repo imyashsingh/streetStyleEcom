@@ -7,13 +7,13 @@ const UserMenu = () => {
             <div className="font-bold">User Panel</div>
             <Link
                 to="/dashboard/user/profile"
-                className="hover:font-bold font-2xl"
+                className="hover:font-bold font-medium font-2xl"
             >
                 Edit Profile
             </Link>
             <Link
                 to="/dashboard/user/orders-status"
-                className="hover:font-bold font-2xl"
+                className="hover:font-bold font-medium font-2xl"
             >
                 Orders
             </Link>

@@ -56,17 +56,18 @@ const CreateCategory = () => {
                     setEditButton={setEditButton}
                 />
             )}
-            <div className="font-bold text-3xl">Create Category</div>
+            <div className="font-semibold text-2xl">Create Category</div>
             <form
                 className="p-5 w-full text-center "
                 onSubmit={handleSubmitCategory}
             >
                 <input
-                    className=" w-full p-3 border-2 border-black"
+                    className=" w-full p-3 border-2 rounded-lg border-black"
                     placeholder="Enter New Category"
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
                     required
+                    autoComplete="off"
                 ></input>
                 <button className="rounded-lg border-2 text-white  bg-blue-500 hover:bg-blue-400 active:bg-blue-300 px-5 py-2 mt-3">
                     Add
@@ -79,7 +80,7 @@ const CreateCategory = () => {
                 </div>
                 {allCategory.map((category) => (
                     <div
-                        className="flex justify-between px-6 py-2 border-2 rounded border-black"
+                        className="flex justify-between px-6 py-2 border-b-2 rounded"
                         key={category?._id}
                     >
                         <div className="p-2">{category?.name}</div>

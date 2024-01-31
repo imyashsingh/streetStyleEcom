@@ -34,7 +34,6 @@ const OrderStatusChange = () => {
             day: "numeric",
             hour: "numeric",
             minute: "numeric",
-            second: "numeric",
         };
 
         return date.toLocaleString("en-US", options);

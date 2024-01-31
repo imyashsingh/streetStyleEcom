@@ -43,7 +43,7 @@ const ProfileEdit = () => {
 
     return (
         <div className="w-full flex flex-col items-center">
-            <div className="font-semibold text-xl"> Update Profile</div>
+            <div className="font-semibold text-2xl"> Update Profile</div>
             <div>
                 <form className="pt-8" onSubmit={handleSubmit}>
                     <div>
@@ -55,6 +55,7 @@ const ProfileEdit = () => {
                             id="username"
                             name="username"
                             value={name}
+                            autoComplete="off"
                             onChange={(e) => setName(e.target.value)}
                             className="w-full border-gray-300 border-2 rounded-md px-3 py-2 "
                         />
@@ -78,6 +79,7 @@ const ProfileEdit = () => {
                             type="phone"
                             id="phone"
                             name="phone"
+                            autoComplete="off"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             className="w-full border-gray-300 border-2 rounded-md px-3 py-2 "
@@ -92,6 +94,7 @@ const ProfileEdit = () => {
                             id="password"
                             name="password"
                             value={password}
+                            autoComplete="off"
                             placeholder="Enter Your Password"
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full border-gray-300 border-2 rounded-md px-3 py-2 "
@@ -106,6 +109,7 @@ const ProfileEdit = () => {
                             type="address"
                             id="adress"
                             name="adress"
+                            autoComplete="off"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             className="w-full border-gray-300 border-2 rounded-md px-3 py-2 "
@@ -119,6 +123,7 @@ const ProfileEdit = () => {
                             type="movi"
                             id="movi"
                             name="movi"
+                            autoComplete="off"
                             value={answer}
                             onChange={(e) => setAnswer(e.target.value)}
                             className="w-full border-gray-300 border-2 rounded-md px-3 py-2 "

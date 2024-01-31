@@ -57,7 +57,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
     //search value handling
     const handleSubmit = (e) => {
         e.preventDefault();
-        searchValue.length !== 0 && navigate(`/product?search${searchValue}`);
+        searchValue.length !== 0 && navigate(`/product?search=${searchValue}`);
     };
 
     return (
@@ -176,7 +176,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                     searchSelected
                         ? `${
                               location.pathname !== "/" && "bg-white"
-                          } text-center border-b-2 border-gray-950`
+                          } text-center`
                         : "hidden"
                 }
                 ref={searchRef}
@@ -184,7 +184,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                 <form className="inline-block " onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        className="h-10 p-4 w-[400px] rounded border-x-2 border-gray-950"
+                        className="h-10 p-4 w-[400px] rounded border-2 border-gray-950"
                         placeholder="SEARCH"
                         value={searchValue}
                         onChange={(e) => {

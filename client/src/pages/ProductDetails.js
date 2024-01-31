@@ -60,9 +60,14 @@ const ProductDetails = () => {
                 JSON.stringify([...cart, { product, buySize, quantity: 1 }])
             );
         } else {
-            cart[index].quantity = cart[index].quantity + 1;
-            setCart(cart);
-            localStorage.setItem("cart", JSON.stringify([...cart]));
+            let updatedCart = cart?.map((ele, i) => {
+                if (i === index) {
+                    ele.quantity = ele.quantity + 1;
+                }
+                return ele;
+            });
+            setCart(updatedCart);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
         }
         toast.success("Product Added To Cart");
     };

@@ -120,7 +120,7 @@ const CreateProduct = () => {
                                         type="text"
                                         name="brand"
                                         id="brand"
-                                        autoComplete="family-name"
+                                        autoComplete="brand"
                                         value={brand}
                                         onChange={(e) =>
                                             setBrand(e.target.value)
@@ -176,7 +176,7 @@ const CreateProduct = () => {
                                         type="Number"
                                         name="price"
                                         id="price"
-                                        autoComplete="address-level1"
+                                        autoComplete="price"
                                         value={price}
                                         onChange={(e) =>
                                             setPrice(
@@ -190,7 +190,7 @@ const CreateProduct = () => {
                             </div>
                             <div className="sm:col-span-2">
                                 <label
-                                    htmlFor="postal-code"
+                                    htmlFor="color"
                                     className="block text-sm font-medium leading-6 text-gray-900"
                                 >
                                     Color
@@ -198,9 +198,9 @@ const CreateProduct = () => {
                                 <div className="mt-2">
                                     <input
                                         type="text"
-                                        name="postal-code"
-                                        id="postal-code"
-                                        autoComplete="postal-code"
+                                        name="color"
+                                        id="color"
+                                        autoComplete="color"
                                         value={color}
                                         onChange={(e) =>
                                             setColor(e.target.value)
@@ -273,13 +273,13 @@ const CreateProduct = () => {
                                 <div className="flex justify-start items-center gap-1">
                                     <div
                                         onClick={() => addSizeArray()}
-                                        className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 active:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                                     >
                                         Add
                                     </div>
                                     <div
                                         onClick={() => setSizeAndQuantity([])}
-                                        className=" cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className=" cursor-pointer rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 active:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                                     >
                                         Reset
                                     </div>
@@ -324,7 +324,7 @@ const CreateProduct = () => {
                         </div>
                     </div>
                     <div className="col-span-full">
-                        <label className="border-2 p-3">
+                        <label className="border-2 p-3 cursor-pointer">
                             Upload Image
                             <input
                                 name="file"
