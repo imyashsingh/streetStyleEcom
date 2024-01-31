@@ -18,7 +18,10 @@ const Layout = () => {
                         sideBarSwitch={sideBarSwitch}
                         setSideBarSwitch={setSideBarSwitch}
                     />
-                    <SideBar sideBarSwitch={sideBarSwitch} />
+                    <SideBar
+                        sideBarSwitch={sideBarSwitch}
+                        setSideBarSwitch={setSideBarSwitch}
+                    />
                     <Outlet />
                 </div>
                 {location.pathname !== "/" && <Footer />}

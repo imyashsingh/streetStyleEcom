@@ -143,6 +143,9 @@ const ProductGrid = () => {
                     </Link>
                 ))}
             </div>
+            {products?.length === 0 && (
+                <div className="p-6 font-medium text-xl">No More Result</div>
+            )}
             <div>
                 <button
                     onClick={() => {

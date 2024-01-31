@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAllCategory } from "../context/categoryContext";
 
-const SideBar = ({ sideBarSwitch }) => {
+const SideBar = ({ sideBarSwitch, setSideBarSwitch }) => {
     const { allCategory } = useAllCategory();
+    const sideBarRef = useRef();
+
+    useEffect(() => {
+        // close profile dropdown if click anyware
+        const handleDropdown = (event) => {
+            if (
+                sideBarRef.current &&
+                !sideBarRef.current.contains(event.target)
+            ) {
+                setSideBarSwitch(false);
+            }
+        };
+        document.addEventListener("mousedown", handleDropdown);
+    }, [setSideBarSwitch]);
+
     return (
         <div
+            ref={sideBarRef}
             className={
                 sideBarSwitch
                     ? "bg-white fixed h-screen w-48 flex flex-col justify-start items-center border-gray-950 border-r-2 pt-24 gap-3 z-9"
