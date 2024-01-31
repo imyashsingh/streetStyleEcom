@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import men from "../../images/HomePage/Men.jpg";
 import { toast } from "react-toastify";
 import { getUserOrderApi } from "../../api/orderApi";
 
@@ -77,9 +76,9 @@ const OrdersUser = () => {
                         >
                             <div className="flex border-t-2 p-2 ">
                                 <img
-                                    src={men}
+                                    src={p?.product?.image?.url}
                                     alt="product"
-                                    className="h-full w-3/12 object-cover object-center pr-3 "
+                                    className=" h-20 w-auto object-cover object-center pr-3 "
                                 />
                                 <div className="ps-3 text-xs sm:text-sm flex">
                                     <div className="ps-3">

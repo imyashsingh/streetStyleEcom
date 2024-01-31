@@ -11,7 +11,6 @@ const EditCategoryBox = ({ updateCategory, setEditButton }) => {
     const handleUpdate = async () => {
         await updateCategoryApi({ categoryName, id: updateCategory._id })
             .then(({ data }) => {
-                console.log(data);
                 setEditButton(false);
                 getAllCategory(setAllCategory);
                 toast.success(data?.message);

@@ -12,7 +12,7 @@ const ProductGrid = () => {
 
     const { allCategory } = useAllCategory();
 
-    const [page, setPage] = useState(queryFilter.get("page") || 1);
+    const [page, setPage] = useState(Number(queryFilter.get("page")) || 1);
     const [category, setCategory] = useState(queryFilter.get("category") || "");
     const [products, setProducts] = useState([]);
     const [brand, setBrand] = useState(queryFilter.get("brand") || "");

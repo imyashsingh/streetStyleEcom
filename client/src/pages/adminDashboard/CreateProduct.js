@@ -147,7 +147,6 @@ const CreateProduct = () => {
                                             value: null,
                                         }}
                                         onChange={(e) => {
-                                            console.log(e.target.value);
                                             setCategory(e.target.value);
                                         }}
                                         required
@@ -325,12 +324,12 @@ const CreateProduct = () => {
                     </div>
                     <div className="col-span-full">
                         <label className="border-2 p-3 cursor-pointer">
-                            Upload Image
+                            Upload Image{" "}
                             <input
                                 name="file"
                                 type="file"
-                                hidden
                                 accept="image/*"
+                                className="w-1"
                                 onChange={(e) => setImage(e.target.files[0])}
                                 required
                             />

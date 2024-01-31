@@ -36,7 +36,6 @@ const ProductEditForm = () => {
             setPid(newpid);
             await getSingleProductsApi(newpid)
                 .then(({ data }) => {
-                    console.log(data?.product?.sizes);
                     setName(data?.product?.name);
                     setBrand(data?.product?.brand);
                     setCategory(data?.product?.category?._id);
@@ -45,7 +44,6 @@ const ProductEditForm = () => {
                     setDescription(data?.product?.description);
                     setSizeAndQuantity(data?.product?.sizes);
                     setImage(data?.product?.image?.url);
-                    console.log(data?.product?.category?._id);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -177,7 +175,7 @@ const ProductEditForm = () => {
                                         type="text"
                                         name="brand"
                                         id="brand"
-                                        autoComplete="family-name"
+                                        autoComplete="brand"
                                         value={brand}
                                         onChange={(e) =>
                                             setBrand(e.target.value)
@@ -230,7 +228,7 @@ const ProductEditForm = () => {
                                         type="Number"
                                         name="price"
                                         id="price"
-                                        autoComplete="address-level1"
+                                        autoComplete="price"
                                         value={price}
                                         onChange={(e) =>
                                             setPrice(
@@ -252,9 +250,9 @@ const ProductEditForm = () => {
                                 <div className="mt-2">
                                     <input
                                         type="text"
-                                        name="postal-code"
-                                        id="postal-code"
-                                        autoComplete="postal-code"
+                                        name="color"
+                                        id="color"
+                                        autoComplete="color"
                                         value={color}
                                         onChange={(e) =>
                                             setColor(e.target.value)
@@ -306,7 +304,7 @@ const ProductEditForm = () => {
                                         type="Number"
                                         name="quantity"
                                         id="quantity"
-                                        autoComplete="address-level1"
+                                        autoComplete="quantity"
                                         value={quantity}
                                         onChange={(e) => {
                                             setQuantity(
@@ -327,13 +325,13 @@ const ProductEditForm = () => {
                                 <div className="flex justify-start items-center gap-1">
                                     <div
                                         onClick={() => addSizeArray()}
-                                        className="cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 active:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                                     >
                                         Add
                                     </div>
                                     <div
                                         onClick={() => setSizeAndQuantity([])}
-                                        className=" cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className=" cursor-pointer rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-red-400 focus-visible:outline-red-600"
                                     >
                                         Reset
                                     </div>
@@ -367,6 +365,7 @@ const ProductEditForm = () => {
                                         rows={3}
                                         required
                                         value={description}
+                                        autoComplete="off"
                                         onChange={(e) =>
                                             setDescription(e.target.value)
                                         }
@@ -384,6 +383,7 @@ const ProductEditForm = () => {
                                 name="file"
                                 type="file"
                                 hidden
+                                autoComplete="off"
                                 accept="image/*"
                                 onChange={(e) => {
                                     setImage(e.target.files[0]);

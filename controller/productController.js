@@ -234,7 +234,7 @@ export const getProductsController = async (req, res) => {
         let { search, page = 1, sortprice, category, brand, size } = req.query;
 
         //Pre page products
-        const perPage = 6;
+        const perPage = 8;
         //Pagination with filter
         if (page < 1) {
             page = 1;

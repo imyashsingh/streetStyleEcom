@@ -7,7 +7,7 @@ import men from "../../images/HomePage/Men.jpg";
 const ProductsEdit = () => {
     const [queryFilter, setQueryFilter] = useSearchParams();
     const [search, setSearch] = useState(queryFilter.get("search") || "");
-    const [page, setPage] = useState(queryFilter.get("page") || 1);
+    const [page, setPage] = useState(Number(queryFilter.get("page")) || 1);
     const [products, setProducts] = useState([]);
     const [nextPageButton, setNextPageButton] = useState(true);
 
@@ -50,7 +50,7 @@ const ProductsEdit = () => {
                 </button>
             </form>
             {/*All Product Grid */}
-            <div className="mt-6 p-2 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 p-2 grid  gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (
                     <Link
                         to={`/dashboard/admin/product-edit/${product.slug}?pid=${product._id}`}
@@ -59,8 +59,8 @@ const ProductsEdit = () => {
                     >
                         <div className=" w-full overflow-hidden rounded-md bg-gray-200  lg:h-80">
                             <img
-                                src={men}
-                                alt="Front of men's Basic Tee in black."
+                                src={product?.image?.url}
+                                alt="product"
                                 className="h-full w-full object-cover object-center"
                             />
                         </div>
@@ -81,6 +81,9 @@ const ProductsEdit = () => {
                     </Link>
                 ))}
             </div>
+            {products?.length === 0 && (
+                <div className="p-6 font-medium text-xl">No More Result</div>
+            )}
             <div>
                 <button
                     onClick={() => {

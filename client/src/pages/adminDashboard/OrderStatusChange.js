@@ -125,7 +125,7 @@ const OrderStatusChange = () => {
                         >
                             <div className="flex border-t-2 p-2 ">
                                 <img
-                                    src={men}
+                                    src={p?.product?.image?.url}
                                     alt="product"
                                     className="h-full w-3/12 object-cover object-center pr-3 "
                                 />

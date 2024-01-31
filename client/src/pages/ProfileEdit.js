@@ -30,6 +30,7 @@ const ProfileEdit = () => {
                 ls.user = data?.updatedUser;
                 localStorage.setItem("auth", JSON.stringify(ls));
                 toast.success(data.message);
+                setPassword("");
             })
             .catch((err) => {
                 console.log(err);
