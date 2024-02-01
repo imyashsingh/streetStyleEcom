@@ -18,9 +18,9 @@ const ForgotPasswordPage = () => {
         await AuthForgotPasswordApi({ email, password, answer })
             .then(({ data }) => {
                 if (data.success === false) {
-                    throw new Error(data.message);
+                    throw new Error(data?.message);
                 }
-                toast.success(data.message);
+                toast.success(data?.message);
                 navigate("/login");
             })
             .catch((err) => {
@@ -61,7 +61,7 @@ const ForgotPasswordPage = () => {
                                 />
                                 <input
                                     type="password"
-                                    placeholder="Password"
+                                    placeholder="New Password"
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { toast } from "react-toastify";
-import men from "../images/HomePage/Men.jpg";
 
 import { getSingleProductsApi } from "../api/poductApi";
 import { useCart } from "../context/cartContext";
@@ -10,7 +9,7 @@ import { useCart } from "../context/cartContext";
 const ProductDetails = () => {
     const [queryString] = useSearchParams();
     const { cart, setCart } = useCart();
-    const [pid, setpid] = useState(queryString.get("pid") || "");
+    const pid = queryString.get("pid") || "";
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");
     const [description, setDescription] = useState("");
@@ -77,7 +76,7 @@ const ProductDetails = () => {
             <div className=" lg:flex lg:justify-center  w-full  h-full  pb-28  ">
                 <div className="w-full h-full">
                     <img
-                        src={men}
+                        src={image}
                         alt="Product"
                         className="h-full w-full object-cover object-center"
                     />
@@ -141,8 +140,8 @@ const ProductDetails = () => {
                                 >
                                     <option value={""}>select Size</option>
                                     {sizes?.map((s) => (
-                                        <option key={s._id} value={s.size}>
-                                            {s.size}
+                                        <option key={s?._id} value={s?.size}>
+                                            {s?.size}
                                         </option>
                                     ))}
                                 </select>

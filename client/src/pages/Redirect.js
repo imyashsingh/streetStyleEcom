@@ -17,7 +17,9 @@ const Redirect = () => {
 
     return (
         <div className="w-screen h-screen flex justify-center items-center">
-            <h1>Redirecting You Back In {count}</h1>
+            <h1 className="font-semibold text-xl leading-loose">
+                Redirecting You Back In {count}
+            </h1>
         </div>
     );
 };

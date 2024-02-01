@@ -29,7 +29,7 @@ const ProfileEdit = () => {
                 ls = JSON.parse(ls);
                 ls.user = data?.updatedUser;
                 localStorage.setItem("auth", JSON.stringify(ls));
-                toast.success(data.message);
+                toast.success(data?.message);
                 setPassword("");
             })
             .catch((err) => {

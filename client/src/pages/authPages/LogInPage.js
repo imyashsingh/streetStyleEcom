@@ -21,8 +21,8 @@ const RegisterPage = () => {
                     throw new Error(data?.message);
                 }
                 setAuth(data.user);
-                localStorage.setItem("auth", JSON.stringify(data.user));
-                toast.success(data.message);
+                localStorage.setItem("auth", JSON.stringify(data?.user));
+                toast.success(data?.message);
                 navigate("/");
             })
             .catch((err) => {

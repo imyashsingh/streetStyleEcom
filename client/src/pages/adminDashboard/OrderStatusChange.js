@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import men from "../../images/HomePage/Men.jpg";
 import { changeOrderStatusApi, getAllOrderApi } from "../../api/orderApi";
 import { toast } from "react-toastify";
 
@@ -62,7 +61,7 @@ const OrderStatusChange = () => {
         <div className="flex flex-col w-full ">
             <div className="font-semibold text-xl">All Orders</div>
             {orders?.map((o, i) => (
-                <div key={o._id}>
+                <div key={o?._id}>
                     <table className="table-fixed text-center">
                         <thead>
                             <tr>
@@ -83,7 +82,7 @@ const OrderStatusChange = () => {
                                         onChange={(e) => {
                                             handleStatusChange(
                                                 e.target.value,
-                                                o._id
+                                                o?._id
                                             );
                                         }}
                                         className="m-2 mx-0 p-2 border-gray-600 border-2 rounded-md"
@@ -106,14 +105,14 @@ const OrderStatusChange = () => {
                                         </option>
                                     </select>
                                 </td>
-                                <td className=" px-4 py-2">{o.user.name}</td>
+                                <td className=" px-4 py-2">{o?.user?.name}</td>
                                 <td className=" px-4 py-2">
-                                    {getTime(o.createdAt)}
+                                    {getTime(o?.createdAt)}
                                 </td>
                                 <td className=" px-4 py-2">Success</td>
                                 <td className=" px-4 py-2">
                                     <span>&#8377;</span>
-                                    {o.totalAmount}
+                                    {o?.totalAmount}
                                 </td>
                             </tr>
                         </tbody>
@@ -131,14 +130,14 @@ const OrderStatusChange = () => {
                                 />
                                 <div className="ps-3 text-xs sm:text-sm flex">
                                     <div className="ps-3">
-                                        <div>Brand : {p.product.brand}</div>
-                                        <div>Name : {p.product.name}</div>
-                                        <div>Color : {p.product.color}</div>
+                                        <div>Brand : {p?.product?.brand}</div>
+                                        <div>Name : {p?.product?.name}</div>
+                                        <div>Color : {p?.product?.color}</div>
                                     </div>
                                     <div className="ps-6">
-                                        <div>Price : {p.product.price}</div>
-                                        <div>Size : {p.buySize}</div>
-                                        <div>Quantity : {p.quantity}</div>
+                                        <div>Price : {p?.product?.price}</div>
+                                        <div>Size : {p?.buySize}</div>
+                                        <div>Quantity : {p?.quantity}</div>
                                     </div>
                                 </div>
                             </div>

@@ -151,7 +151,7 @@ export const userForgotPasswordController = async (req, res) => {
         });
         res.status(200).send({
             success: true,
-            message: "Password Successfully",
+            message: "Password Updated Successfully",
         });
     } catch (error) {
         console.error("Error in Forgot Password <=>", error);

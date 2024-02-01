@@ -57,7 +57,7 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
     //search value handling
     const handleSubmit = (e) => {
         e.preventDefault();
-        searchValue.length !== 0 && navigate(`/product?search=${searchValue}`);
+        searchValue?.length !== 0 && navigate(`/product?search=${searchValue}`);
     };
 
     return (
@@ -132,11 +132,11 @@ const Header = ({ sideBarSwitch, setSideBarSwitch }) => {
                                     {/*when user loged in */}
                                     <li className="cursor-pointer font-bold">
                                         Hi{" "}
-                                        {auth?.user?.name.length > 5
+                                        {auth?.user?.name?.length > 5
                                             ? auth?.user?.name
-                                                  .substr(0, 4)
-                                                  .toLowerCase() + ".."
-                                            : auth?.user?.name.toLowerCase()}
+                                                  ?.substr(0, 4)
+                                                  ?.toLowerCase() + ".."
+                                            : auth?.user?.name?.toLowerCase()}
                                     </li>
                                     <li>
                                         {/*Different routes for admin and user */}

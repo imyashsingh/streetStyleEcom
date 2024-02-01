@@ -33,11 +33,11 @@ const SideBar = ({ sideBarSwitch, setSideBarSwitch }) => {
             </Link>
             {allCategory.map((c) => (
                 <Link
-                    to={`/product?category=${c._id}`}
-                    key={c._id}
+                    to={`/product?category=${c?._id}`}
+                    key={c?._id}
                     className="hover:font-bold"
                 >
-                    {c.name.toUpperCase()}
+                    {c?.name?.toUpperCase()}
                 </Link>
             ))}
             <hr className="border-gray-950 w-48" />

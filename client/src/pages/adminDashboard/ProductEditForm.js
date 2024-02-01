@@ -210,7 +210,7 @@ const ProductEditForm = () => {
                                         </option>
                                         {allCategory.map((c) => (
                                             <option key={c._id} value={c._id}>
-                                                {c.name}
+                                                {c?.name}
                                             </option>
                                         ))}
                                     </select>
@@ -338,7 +338,7 @@ const ProductEditForm = () => {
                                 </div>
                             </div>
                             <div className="col-span-full">
-                                {sizeAndQuantity.length === 0 && (
+                                {sizeAndQuantity?.length === 0 && (
                                     <div className="text-red-600">
                                         Please Fill Size and Quantity!!
                                     </div>
@@ -386,7 +386,7 @@ const ProductEditForm = () => {
                                 autoComplete="off"
                                 accept="image/*"
                                 onChange={(e) => {
-                                    setImage(e.target.files[0]);
+                                    setImage(e?.target?.files[0]);
                                     setLimage(false);
                                 }}
                             />
@@ -420,7 +420,7 @@ const ProductEditForm = () => {
                         <>
                             <button
                                 type="submit"
-                                disabled={sizeAndQuantity.length === 0}
+                                disabled={sizeAndQuantity?.length === 0}
                                 className={`rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600`}
                             >
                                 UPDATE

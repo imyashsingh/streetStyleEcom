@@ -21,12 +21,12 @@ const Home = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             // Update the current image every 5 seconds (adjust as needed)
-            setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+            setCurrentImage((prevImage) => (prevImage + 1) % images?.length);
         }, 5000);
 
         // Cleanup the interval on component unmount
         return () => clearInterval(interval);
-    }, [images.length]);
+    }, [images?.length]);
 
     return (
         <div className="bg-gray-50 flex justify-center items-center  w-screen h-screen  overflow-hidden">

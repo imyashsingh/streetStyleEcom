@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useCart } from "../context/cartContext";
 import { useAuth } from "../context/authContext";
 
-import men from "../images/HomePage/Men.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -157,7 +156,7 @@ const CartPage = () => {
                         <div key={i} className=" p-2 flex justify-between">
                             <div className="flex border-t-2 p-2">
                                 <img
-                                    src={men}
+                                    src={c?.product?.image?.url}
                                     alt="product"
                                     className="h-full w-4/12 object-cover object-center pr-3 "
                                 />

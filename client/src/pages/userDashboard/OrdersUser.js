@@ -32,7 +32,6 @@ const OrdersUser = () => {
             day: "numeric",
             hour: "numeric",
             minute: "numeric",
-            second: "numeric",
         };
 
         return date.toLocaleString("en-US", options);
@@ -47,7 +46,7 @@ const OrdersUser = () => {
                             <tr>
                                 <th className=" px-4 py-2">#</th>
                                 <th className=" px-4 py-2">Status</th>
-                                <th className=" px-4 py-2">Buyer</th>
+                                <th className=" px-4 py-2">Transaction Id</th>
                                 <th className=" px-4 py-2">Date</th>
                                 <th className=" px-4 py-2">Payment</th>
                                 <th className=" px-4 py-2">Total Amount</th>
@@ -56,15 +55,15 @@ const OrdersUser = () => {
                         <tbody>
                             <tr>
                                 <td className=" px-4 py-2">{i + 1}</td>
-                                <td className=" px-4 py-2">{o.status}</td>
-                                <td className=" px-4 py-2">{o.user.name}</td>
+                                <td className=" px-4 py-2">{o?.status}</td>
+                                <td className=" px-4 py-2">{o?.paymentId}</td>
                                 <td className=" px-4 py-2">
                                     {getTime(o.createdAt)}
                                 </td>
                                 <td className=" px-4 py-2">Success</td>
                                 <td className=" px-4 py-2">
                                     <span>&#8377;</span>
-                                    {o.totalAmount}
+                                    {o?.totalAmount}
                                 </td>
                             </tr>
                         </tbody>
@@ -82,14 +81,14 @@ const OrdersUser = () => {
                                 />
                                 <div className="ps-3 text-xs sm:text-sm flex">
                                     <div className="ps-3">
-                                        <div>Brand : {p.product.brand}</div>
-                                        <div>Name : {p.product.name}</div>
-                                        <div>Color : {p.product.color}</div>
+                                        <div>Brand : {p?.product?.brand}</div>
+                                        <div>Name : {p?.product?.name}</div>
+                                        <div>Color : {p?.product?.color}</div>
                                     </div>
                                     <div className="ps-6">
-                                        <div>Price : {p.product.price}</div>
-                                        <div>Size : {p.buySize}</div>
-                                        <div>Quantity : {p.quantity}</div>
+                                        <div>Price : {p?.product?.price}</div>
+                                        <div>Size : {p?.buySize}</div>
+                                        <div>Quantity : {p?.quantity}</div>
                                     </div>
                                 </div>
                             </div>

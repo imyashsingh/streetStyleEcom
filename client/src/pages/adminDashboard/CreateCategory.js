@@ -9,12 +9,15 @@ const CreateCategory = () => {
     const [categoryName, setCategoryName] = useState("");
     const [editButton, setEditButton] = useState(false);
     const [updateCategory, setUpdateCategory] = useState("");
+    const [loadingAdd, setLoadingAdd] = useState(false);
+    const [loadingDel, setLoadingDel] = useState(false);
 
     const { allCategory, setAllCategory } = useAllCategory();
 
     //handle Create Category
     const handleSubmitCategory = async (e) => {
         e.preventDefault();
+        setLoadingAdd(true);
         await createCategoryApi({ categoryName })
             .then(({ data }) => {
                 getAllCategory(setAllCategory);
@@ -29,10 +32,12 @@ const CreateCategory = () => {
                         "Error In Creating Category"
                 );
             });
+        setLoadingAdd(false);
     };
 
     //Deleting Category
     const handleDelete = async (category) => {
+        setLoadingDel(true);
         await deleteCategoryApi({ id: category?._id })
             .then(({ data }) => {
                 getAllCategory(setAllCategory);
@@ -46,6 +51,7 @@ const CreateCategory = () => {
                         "Error In Deleting Category"
                 );
             });
+        setLoadingDel(false);
     };
 
     return (
@@ -69,9 +75,18 @@ const CreateCategory = () => {
                     required
                     autoComplete="off"
                 ></input>
-                <button className="rounded-lg border-2 text-white  bg-blue-500 hover:bg-blue-400 active:bg-blue-300 px-5 py-2 mt-3">
-                    Add
-                </button>
+                {loadingAdd ? (
+                    <button
+                        disabled
+                        className="rounded-lg border-2 text-white bg-gray-800 px-5 py-2 mt-3 "
+                    >
+                        Processing...
+                    </button>
+                ) : (
+                    <button className="rounded-lg border-2 text-white  bg-blue-500 hover:bg-blue-400 active:bg-blue-300 px-5 py-2 mt-3">
+                        Add
+                    </button>
+                )}
             </form>
             <div className="w-full flex flex-col p-3 gap-1">
                 <div className="flex justify-between px-6 py-2 border-2 rounded border-black font-bold">
@@ -96,6 +111,7 @@ const CreateCategory = () => {
                             </button>
                             <button
                                 onClick={() => handleDelete(category)}
+                                disabled={loadingDel}
                                 className=" rounded m-1 p-2 text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
                             >
                                 Delete

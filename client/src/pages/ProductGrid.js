@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getProducts } from "../helper/productHelper";
 
-import men from "../images/HomePage/Men.jpg";
 import { useAllCategory } from "../context/categoryContext";
 import { allBrand } from "../default/defaultConstant";
 import { allSize } from "../default/defaultConstant";
@@ -49,8 +48,8 @@ const ProductGrid = () => {
                         >
                             <option value={""}>Filter Catagory</option>
                             {allCategory?.map((c) => (
-                                <option key={c._id} value={c._id}>
-                                    {`Category:${c.name}`}
+                                <option key={c?._id} value={c?._id}>
+                                    {`Category:${c?.name}`}
                                 </option>
                             ))}
                         </select>
@@ -89,7 +88,7 @@ const ProductGrid = () => {
                             <option value={""}>Filter Size</option>
                             {allSize?.map((b, i) => (
                                 <option key={i} value={b}>
-                                    {`Size:UK ${b}`}
+                                    {b}
                                 </option>
                             ))}
                         </select>
@@ -115,13 +114,13 @@ const ProductGrid = () => {
             <div className="mt-6 p-2 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (
                     <Link
-                        to={`/product/${product.slug}?pid=${product._id}`}
+                        to={`/product/${product?.slug}?pid=${product?._id}`}
                         key={product._id}
                         className="hover:opacity-75"
                     >
                         <div className=" w-full overflow-hidden rounded-md bg-gray-200  lg:h-80">
                             <img
-                                src={men}
+                                src={product?.image?.url}
                                 alt="Front of men's Basic Tee in black."
                                 className="h-full w-full object-cover object-center"
                             />
@@ -129,15 +128,15 @@ const ProductGrid = () => {
                         <div className="mt-4 flex justify-between">
                             <div>
                                 <h3 className="text-sm text-gray-700">
-                                    {product.name}
+                                    {product?.name}
                                 </h3>
                                 <p className="mt-1 text-sm text-gray-500">
-                                    {product.brand}
+                                    {product?.brand}
                                 </p>
                             </div>
                             <p className="text-sm font-medium text-gray-900">
                                 <span>&#8377;</span>
-                                {product.price}
+                                {product?.price}
                             </p>
                         </div>
                     </Link>

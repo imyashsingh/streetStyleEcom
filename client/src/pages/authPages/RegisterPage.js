@@ -28,8 +28,8 @@ const RegisterPage = () => {
             address,
         })
             .then(({ data }) => {
-                if (data?.success === false) throw new Error(data.message);
-                toast.success(data.message);
+                if (data?.success === false) throw new Error(data?.message);
+                toast.success(data?.message);
                 navigate("/login");
             })
             .catch((err) => {

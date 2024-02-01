@@ -40,7 +40,6 @@ const CreateProduct = () => {
             .then(({ data }) => {
                 toast.success(data?.message);
                 navigate("/dashboard/admin/product-edit");
-                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -50,6 +49,7 @@ const CreateProduct = () => {
                         "Error In Creating Product"
                 );
             });
+        setLoading(false);
     };
 
     const addSizeArray = () => {
@@ -156,8 +156,8 @@ const CreateProduct = () => {
                                             Select Catagory
                                         </option>
                                         {allCategory.map((c) => (
-                                            <option key={c._id} value={c._id}>
-                                                {c.name}
+                                            <option key={c?._id} value={c?._id}>
+                                                {c?.name}
                                             </option>
                                         ))}
                                     </select>
@@ -285,7 +285,7 @@ const CreateProduct = () => {
                                 </div>
                             </div>
                             <div className="col-span-full">
-                                {sizeAndQuantity.length === 0 && (
+                                {sizeAndQuantity?.length === 0 && (
                                     <div className="text-red-600">
                                         Please Fill Size and Quantity!!
                                     </div>
@@ -309,7 +309,7 @@ const CreateProduct = () => {
                                     <textarea
                                         id="about"
                                         name="about"
-                                        rows={3}
+                                        rows={4}
                                         required
                                         value={description}
                                         onChange={(e) =>
@@ -358,7 +358,7 @@ const CreateProduct = () => {
                     ) : (
                         <button
                             type="submit"
-                            disabled={sizeAndQuantity.length === 0}
+                            disabled={sizeAndQuantity?.length === 0}
                             className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                         >
                             Save

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getProducts } from "../../helper/productHelper";
-import men from "../../images/HomePage/Men.jpg";
-//import kid from "../../images/HomePage/Kid.jpg";
 
 const ProductsEdit = () => {
     const [queryFilter, setQueryFilter] = useSearchParams();
@@ -15,7 +13,7 @@ const ProductsEdit = () => {
         const getProductList = async () => {
             const res = await getProducts(queryFilter);
             setProducts(res?.products);
-            if (res?.products.length) setNextPageButton(false);
+            if (res?.products?.length) setNextPageButton(false);
             else setNextPageButton(true);
         };
 
@@ -53,8 +51,8 @@ const ProductsEdit = () => {
             <div className="mt-6 p-2 grid  gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4">
                 {products.map((product) => (
                     <Link
-                        to={`/dashboard/admin/product-edit/${product.slug}?pid=${product._id}`}
-                        key={product._id}
+                        to={`/dashboard/admin/product-edit/${product?.slug}?pid=${product?._id}`}
+                        key={product?._id}
                         className="hover:opacity-75"
                     >
                         <div className=" w-full overflow-hidden rounded-md bg-gray-200  lg:h-80">
@@ -67,15 +65,15 @@ const ProductsEdit = () => {
                         <div className="mt-4 flex justify-between">
                             <div>
                                 <h3 className="text-sm text-gray-700">
-                                    {product.name}
+                                    {product?.name}
                                 </h3>
                                 <p className="mt-1 text-sm text-gray-500">
-                                    {product.brand}
+                                    {product?.brand}
                                 </p>
                             </div>
                             <p className="text-sm font-medium text-gray-900">
                                 <span>&#8377;</span>
-                                {product.price}
+                                {product?.price}
                             </p>
                         </div>
                     </Link>
