@@ -8,10 +8,7 @@ const CategoryProvider = ({ children }) => {
     const [allCategory, setAllCategory] = useState([]);
 
     useEffect(() => {
-        const getcat = async () => {
-            await getAllCategory(setAllCategory);
-        };
-        getcat();
+        getAllCategory(setAllCategory);
     }, []);
 
     return (

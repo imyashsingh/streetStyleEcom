@@ -71,7 +71,6 @@ export const userRegisterController = async (req, res) => {
 export const userLoginController = async (req, res) => {
     try {
         const { email, password } = req.body;
-
         //check invalid email password
         if (!email || !password) {
             throw new Error("invalid email or password");
