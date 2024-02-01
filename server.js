@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import { v2 as cloudinary } from "cloudinary";
+import path from "path";
 
 //file imports
 import connectDB from "./config/db.js";
@@ -32,10 +33,24 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-//Test Rest api
-app.get("/", (req, res) => {
-    res.send("just started");
-});
+//------------------------------------------Deployment------------------------------
+
+if (process.env.NODE_ENV === "Production") {
+    const __dirname1 = path.resolve();
+    app.use(express.static(path.join(__dirname1, "./client/build")));
+
+    //rest api
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname1, "./client/build/index.html"));
+    });
+} else {
+    //Test Rest api
+    app.get("/", (req, res) => {
+        res.send("App Is Running Successfully");
+    });
+}
+
+//------------------------------------------Deployment------------------------------
 
 //Routes
 app.use("/api/v1/user", authRouter);
