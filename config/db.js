@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-// Database Connection
-const connectDB = async () => {
-    await mongoose
-        .connect(process.env.MONGODB_URL)
-        .then(() => console.log("Database Connected"))
-        .catch((err) => console.error("Database Connection Error <=>", err));
+const connectDb = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGODB_URL);
+        console.log("Database is connected");
+    } catch (error) {
+        console.log(process.env.MONGODB_URL);
+        console.log(`ERROR in Database Connection=${error}`);
+    }
 };
 
-export default connectDB;
+export default connectDb;
