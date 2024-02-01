@@ -47,7 +47,6 @@ export const createCategoryController = async (req, res) => {
 
 export const getAllCategoryController = async (req, res) => {
     try {
-        console.log("ccccccccccccccccccccccc");
         const allCategory = await CatagoryModel.find({});
 
         res.status(201).send({
