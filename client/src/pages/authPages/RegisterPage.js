@@ -47,7 +47,7 @@ const RegisterPage = () => {
             {!auth?.user ? (
                 <div className="flex items-center justify-center py-32 px-28 w-full h-full">
                     <div className="flex shadow-xl border border-gray-400 rounded-lg">
-                        <div className="bg-gradient-to-r from-gray-600 to-gray-800 hidden md:flex md:justify-center md:items-center md:basis-2/4 rounded">
+                        <div className="bg-gradient-to-r from-gray-800 to-gray-900 hidden md:flex md:justify-center md:items-center md:basis-2/4 rounded">
                             <h1 className="font-black text-white text-5xl">
                                 WELCOME
                             </h1>
