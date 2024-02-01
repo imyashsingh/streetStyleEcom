@@ -31,7 +31,7 @@ const SideBar = ({ sideBarSwitch, setSideBarSwitch }) => {
             <Link to="/" className="hover:font-bold">
                 HOME
             </Link>
-            {allCategory.map((c) => (
+            {allCategory?.map((c) => (
                 <Link
                     to={`/product?category=${c?._id}`}
                     key={c?._id}
