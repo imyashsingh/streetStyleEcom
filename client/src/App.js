@@ -24,11 +24,8 @@ import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import ProfileEdit from "./pages/ProfileEdit";
 import OrdersUser from "./pages/userDashboard/OrdersUser";
-import axios from "axios";
 
 function App() {
-    axios.defaults.baseURL = process.env.REACT_APP_API;
-
     return (
         <div className="App">
             <Routes>
