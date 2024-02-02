@@ -14,11 +14,13 @@ const RegisterPage = () => {
     const [answer, setAnswer] = useState("");
     const navigate = useNavigate();
     const { auth } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
 
     //handle register form
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await AuthRegisterUserApi({
             name,
             email,
@@ -40,6 +42,7 @@ const RegisterPage = () => {
                         "Error In Registration"
                 );
             });
+        setIsLoading(false);
     };
     return (
         <>
@@ -111,12 +114,21 @@ const RegisterPage = () => {
                                     autoComplete="address"
                                     required
                                 />
-                                <button
-                                    type="submit"
-                                    className=" mt-6 py-1 px-2 w-full  text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded"
-                                >
-                                    Sign Up
-                                </button>
+                                {isLoading ? (
+                                    <button
+                                        disabled
+                                        className=" mt-6 py-1 px-2 w-full  text-white bg-gray-800 rounded"
+                                    >
+                                        Processing...
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className=" mt-6 py-1 px-2 w-full  text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded"
+                                    >
+                                        Sign Up
+                                    </button>
+                                )}
                             </form>
                         </div>
                     </div>

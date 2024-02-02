@@ -19,6 +19,8 @@ export const allBrand = [
     "On",
     "Mizuno",
     "Timberland",
+    "ZARA",
+    "H&M",
 ];
 
 export const allSize = [

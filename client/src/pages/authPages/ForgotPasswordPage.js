@@ -11,10 +11,12 @@ const ForgotPasswordPage = () => {
     const [answer, setAnswer] = useState("");
     const navigate = useNavigate();
     const { auth } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
 
     //handle Forgot Password
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await AuthForgotPasswordApi({ email, password, answer })
             .then(({ data }) => {
                 if (data.success === false) {
@@ -31,6 +33,7 @@ const ForgotPasswordPage = () => {
                         "Error In Forgot Password"
                 );
             });
+        setIsLoading(false);
     };
 
     return (
@@ -79,12 +82,21 @@ const ForgotPasswordPage = () => {
                                     autoComplete="off"
                                     required
                                 />
-                                <button
-                                    type="submit"
-                                    className=" mt-6 py-1 px-2 w-full  text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded"
-                                >
-                                    Change Password
-                                </button>
+                                {isLoading ? (
+                                    <button
+                                        disabled
+                                        className=" mt-6 py-1 px-2 w-full  text-white bg-gray-900 rounded"
+                                    >
+                                        Processing...
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className=" mt-6 py-1 px-2 w-full  text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded"
+                                    >
+                                        Change Password
+                                    </button>
+                                )}
                             </form>
                         </div>
                     </div>

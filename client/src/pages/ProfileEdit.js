@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const ProfileEdit = () => {
     const { auth, setAuth } = useAuth();
 
+    const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
@@ -22,6 +23,7 @@ const ProfileEdit = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await profileUpdateApi({ name, phone, address, answer, password })
             .then(({ data }) => {
                 setAuth({ ...auth, user: data?.updatedUser });
@@ -40,6 +42,7 @@ const ProfileEdit = () => {
                         "Error In Editing Product"
                 );
             });
+        setIsLoading(false);
     };
 
     return (
@@ -130,12 +133,21 @@ const ProfileEdit = () => {
                             className="w-full border-gray-300 border-2 rounded-md px-3 py-2 "
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-400 active:bg-blue-300 my-5"
-                    >
-                        Update Profile
-                    </button>
+                    {isLoading ? (
+                        <button
+                            disabled
+                            className="w-full text-white rounded-md px-4 py-2 bg-gray-900 my-5"
+                        >
+                            Processing...
+                        </button>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-400 active:bg-blue-300 my-5"
+                        >
+                            Update Profile
+                        </button>
+                    )}
                 </form>
             </div>
         </div>

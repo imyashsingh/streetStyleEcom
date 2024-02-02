@@ -10,11 +10,12 @@ const RegisterPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { auth, setAuth } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
 
     // Log In Handler
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
         await AuthUserApi({ email, password })
             .then(({ data }) => {
                 if (data?.success === false) {
@@ -33,6 +34,7 @@ const RegisterPage = () => {
                         "Error In LogIn"
                 );
             });
+        setIsLoading(false);
     };
 
     return (
@@ -70,12 +72,21 @@ const RegisterPage = () => {
                                     required
                                     autoComplete="off"
                                 />
-                                <button
-                                    type="submit"
-                                    className=" mt-6 py-1 px-2 w-full text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded"
-                                >
-                                    Sign In
-                                </button>
+                                {isLoading ? (
+                                    <button
+                                        disabled
+                                        className=" mt-6 py-1 px-2 w-full text-white bg-gray-800 rounded"
+                                    >
+                                        Processing...
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className=" mt-6 py-1 px-2 w-full text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded"
+                                    >
+                                        Sign In
+                                    </button>
+                                )}
                             </form>
                             <button
                                 onClick={() => navigate("/forgotPassword")}

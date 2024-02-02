@@ -76,7 +76,6 @@ const ProductEditForm = () => {
             .then(({ data }) => {
                 toast.success(data?.message);
                 navigate("/dashboard/admin/product-edit");
-                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -86,6 +85,7 @@ const ProductEditForm = () => {
                         "Error In Editing Product"
                 );
             });
+        setLoading(false);
     };
 
     //handle delete product
@@ -95,7 +95,6 @@ const ProductEditForm = () => {
             .then(({ data }) => {
                 toast.success(data?.message);
                 navigate("/dashboard/admin/product-edit");
-                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -105,6 +104,7 @@ const ProductEditForm = () => {
                         "Error In Deleting Product"
                 );
             });
+        setLoading(false);
     };
 
     const addSizeArray = () => {

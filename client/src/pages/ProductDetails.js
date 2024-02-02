@@ -20,6 +20,7 @@ const ProductDetails = () => {
     const [color, setColor] = useState("");
     const [buySize, SetBuySize] = useState("");
     const [product, setProduct] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const getProductDetails = async () => {
@@ -48,6 +49,7 @@ const ProductDetails = () => {
     }, [pid]);
 
     const handleCart = (e) => {
+        setIsLoading(true);
         e.preventDefault();
         const index = cart?.findIndex(
             (ele) => ele?.product?._id === pid && ele?.buySize === buySize
@@ -69,6 +71,7 @@ const ProductDetails = () => {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
         }
         toast.success("Product Added To Cart");
+        setIsLoading(false);
     };
 
     return (
@@ -145,12 +148,21 @@ const ProductDetails = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <button
-                                    type="submit"
-                                    className={`rounded-md bg-gray-800 m-2 p-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500`}
-                                >
-                                    Add To Cart
-                                </button>
+                                {isLoading ? (
+                                    <button
+                                        disabled
+                                        className={`rounded-md bg-gray-900 m-2 p-2 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500`}
+                                    >
+                                        Processing...
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className={`rounded-md bg-gray-800 m-2 p-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500`}
+                                    >
+                                        Add To Cart
+                                    </button>
+                                )}
                             </form>
                         </div>
                         <div className="font-semibold text-gray-600">
