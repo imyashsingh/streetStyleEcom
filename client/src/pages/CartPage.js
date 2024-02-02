@@ -20,7 +20,7 @@ const CartPage = () => {
 
     useEffect(() => {
         const getCartProduct = () => {
-            const res = JSON.parse(localStorage.getItem("cart"));
+            const res = JSON.parse(localStorage?.getItem("cart"));
             setCart(res);
         };
 
