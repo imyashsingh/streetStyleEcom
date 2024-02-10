@@ -1,27 +1,4 @@
-export const allBrand = [
-    "Nike",
-    "Adidas",
-    "Jordan",
-    "Converse",
-    "New Balance",
-    "Puma",
-    "Reebok",
-    "Vans",
-    "Under Armour",
-    "ASICS",
-    "Skechers",
-    "Fila",
-    "Lacoste",
-    "Brooks",
-    "Salomon",
-    "Merrell",
-    "HOKA ONE ONE",
-    "On",
-    "Mizuno",
-    "Timberland",
-    "ZARA",
-    "H&M",
-];
+export const allBrand = ["Nike", "Adidas", "Converse", "ZARA", "H&M"];
 
 export const allSize = [
     "UK:1",
