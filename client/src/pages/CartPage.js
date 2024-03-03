@@ -21,7 +21,9 @@ const CartPage = () => {
     useEffect(() => {
         const getCartProduct = () => {
             const res = JSON.parse(localStorage?.getItem("cart"));
-            setCart(res);
+            if (res) {
+                setCart(res);
+            }
         };
 
         getCartProduct();
