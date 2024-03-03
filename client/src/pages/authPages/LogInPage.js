@@ -45,7 +45,7 @@ const RegisterPage = () => {
                 <div className="flex items-center justify-center py-32 px-16 w-full h-full ">
                     <div className="flex shadow-xl border border-gray-400 rounded-lg ">
                         <div className="bg-gradient-to-r from-gray-800 to-gray-900 hidden md:flex md:justify-center  rounded md:items-center md:basis-2/4">
-                            <h1 className="font-black text-white text-5xl ">
+                            <h1 className="font-black text-white text-5xl p-2 ">
                                 WELCOME
                             </h1>
                         </div>
@@ -61,6 +61,8 @@ const RegisterPage = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
+                                <p>Admin Email = admin@admin.com</p>
+                                <p>User Email = test@gmail.com</p>
                                 <input
                                     type="password"
                                     placeholder="Password"
@@ -72,6 +74,8 @@ const RegisterPage = () => {
                                     required
                                     autoComplete="off"
                                 />
+                                <p>Admin Password = 12345</p>
+                                <p>user Password = 12345</p>
                                 {isLoading ? (
                                     <button
                                         disabled

@@ -261,12 +261,15 @@ const CartPage = () => {
                                     </Link>
                                 </div>
                                 {cart?.length !== 0 && (
-                                    <button
-                                        onClick={handleCheckout}
-                                        className="px-4 py-2 my-4 rounded-lg bg-blue-500 hover:bg-blue-400 active:bg-blue-300 text-white"
-                                    >
-                                        Make Payment
-                                    </button>
+                                    <>
+                                        <button
+                                            onClick={handleCheckout}
+                                            className="px-4 py-2 my-4 rounded-lg bg-blue-500 hover:bg-blue-400 active:bg-blue-300 text-white"
+                                        >
+                                            Make Payment
+                                        </button>
+                                        <p>Test card = 4111111111111111</p>
+                                    </>
                                 )}
                             </div>
                         ) : (
